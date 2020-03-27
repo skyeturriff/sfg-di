@@ -1,6 +1,9 @@
 package guru.springframework.sfgdi;
 
+import guru.springframework.sfgdi.controllers.ConstructorInjectedController;
 import guru.springframework.sfgdi.controllers.MyController;
+import guru.springframework.sfgdi.controllers.PropertyInjectedController;
+import guru.springframework.sfgdi.controllers.SetterInjectedController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -30,6 +33,28 @@ public class SfgDiApplication {
 
         String greeting = myController.sayHello();
         System.out.println(greeting);
+
+        // Application will error on start, unless the annotations are
+        // un-commented on the Constructor and Service classes, so that
+        // Spring is aware it needs to manage the injection of the
+        // GreetingService into each of these Controllers.
+        // Note we are not programmatically asking for any type of
+        // GreetingService, we only need to ask the Context to provide
+        // us with the Controllers.
+
+        /*
+        System.out.println("EXAMPLE Property-based injection Controller:");
+        PropertyInjectedController propertyInjectedController = (PropertyInjectedController) ctx.getBean("propertyInjectedController");
+        System.out.println(propertyInjectedController.getGreeting());
+
+        System.out.println("EXAMPLE Setter-based injection Controller:");
+        SetterInjectedController setterInjectedController = (SetterInjectedController) ctx.getBean("setterInjectedController");
+        System.out.println(setterInjectedController.getGreeting());
+
+        System.out.println("EXAMPLE Constructor-based injection Controller:");
+        ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
+        System.out.println(constructorInjectedController.getGreeting());
+         */
 	}
 
 }

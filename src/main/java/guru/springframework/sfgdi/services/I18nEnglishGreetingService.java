@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * This internationalization service returns back a greeting in English.
- * We set it to the "EN" Profile, so that when this profile is active,
- * Spring will know to load this implementation into the Context.
  *
  * Each internationalization service is supplied with the same component
  * name "i18nService". Any dependant classes need only refer to this
@@ -20,15 +18,29 @@ import org.springframework.stereotype.Service;
  * There cannot be more than one component with the same name loaded
  * into the Context.
  *
- * Using Profiles resolves this. Only beans within the current active
+ * Using Profiles resolves this. Only beans added to the current active
  * profile are available, so no conflict occurs in the Context. Spring
  * ignores any bean not included in the current active profile (i.e.,
  * des not load them into the Context).
  *
+ * We tell Spring that this bean is part of the "EN" Profile, so that
+ * when this profile is active, Spring will know to load this implementation
+ * into the Context.
+ *
+ * However, a bean can be added to more than one profile. This bean
+ * is also added to the default Spring profile, making it the default
+ * "i18nService" bean. This makes it available when no active profile
+ * is set, allowing our app to run without needing to set an active
+ * profile.
+ *
+ * Note that only one bean of a type can be added to a profile (including
+ * the default profile), or else the same conflict errors mentioned above
+ * will occur within that profile.
+ *
  * @see I18nEnglishGreetingService
  * @see I18nController
  */
-@Profile("EN")
+@Profile({"EN", "default"})
 @Service("i18nService")
 public class I18nEnglishGreetingService implements GreetingService {
     @Override

@@ -41,6 +41,14 @@ import org.springframework.context.ApplicationContext;
  * Profiles, so that the appropriate ones are loaded depending on
  * which profile is active. This can be useful if we want to use
  * different data layer technologies across different environments.
+ *
+ * There is a Default Profile available within the Spring framework.
+ * This Profile is considered active if no other active profile has
+ * been set (i.e., nothing configured in application.properties or
+ * otherwise). We can add beans to the default profile, so that if
+ * there is no active profile set, these default profile beans will
+ * still be wired into the Context. This way, we don't have to always
+ * set an active profile for our application.
  */
 @SpringBootApplication
 public class SfgDiApplication {

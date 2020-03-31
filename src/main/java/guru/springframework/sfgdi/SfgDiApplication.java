@@ -1,7 +1,7 @@
 package guru.springframework.sfgdi;
 
 import guru.springframework.sfgdi.controllers.ConstructorInjectedController;
-import guru.springframework.sfgdi.controllers.MyController;
+import guru.springframework.sfgdi.controllers.PrimaryGreetingController;
 import guru.springframework.sfgdi.controllers.PropertyInjectedController;
 import guru.springframework.sfgdi.controllers.SetterInjectedController;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +18,17 @@ import org.springframework.context.ApplicationContext;
  *
  * This is one of the FUNDAMENTAL TENANTS of dependency injection;
  * to have the framework doing all the management of it.
+ *
+ * In the main program we ask the Context for different types of
+ * Controllers, which all depend on a GreetingService. Spring takes
+ * over managing how and what GreetingService is injected into each
+ * Controller. The different GreetingService implementations will
+ * be injected by Spring according to the use of Primary and Qualifier
+ * annotations in the Controller and GreetingService classes.
+ *
+ * This provides an example of how we can use Primary and Qualifier
+ * together to control how classes get injected into Spring-managed
+ * components.
  */
 @SpringBootApplication
 public class SfgDiApplication {
@@ -28,12 +39,13 @@ public class SfgDiApplication {
 
         /*
          * This is how Inversion of Control works. The framework is managing
-         * the construction of the MyController object. No where do we need
+         * the construction of the Controller object. No where do we need
          * to explicitly use the "new" keyword - Spring manages the instantiation
          * of and the providing of the object when it is needed.
          */
-        MyController myController = (MyController) ctx.getBean("myController");
-        String greeting = myController.sayHello();
+            System.out.println("EXAMPLE Constructor-based injection using Primary component:");
+        PrimaryGreetingController primaryGreetingController = (PrimaryGreetingController) ctx.getBean("primaryGreetingController");
+        String greeting = primaryGreetingController.sayHello();
         System.out.println(greeting);
 
         /*

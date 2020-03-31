@@ -1,9 +1,6 @@
 package guru.springframework.sfgdi;
 
-import guru.springframework.sfgdi.controllers.ConstructorInjectedController;
-import guru.springframework.sfgdi.controllers.PrimaryGreetingController;
-import guru.springframework.sfgdi.controllers.PropertyInjectedController;
-import guru.springframework.sfgdi.controllers.SetterInjectedController;
+import guru.springframework.sfgdi.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -29,6 +26,21 @@ import org.springframework.context.ApplicationContext;
  * This provides an example of how we can use Primary and Qualifier
  * together to control how classes get injected into Spring-managed
  * components.
+ *
+ * Profiles are very powerful and one of the most commonly used
+ * features of dependency injection, as they allow us to control our
+ * Spring application in different runtime environments. Profiles allow
+ * us to have beans in our configuration that will take on different
+ * characteristics, allowing the application to behave differently
+ * at runtime. Using Profiles, we can get Spring to actually wire up
+ * the application differently depending on which Profile is active
+ * and which beans we assign to that profile.
+ *
+ * For example, we could have both an H2 and MySQL capabilities
+ * configured, and control the H2- and MySQL-specific beans with
+ * Profiles, so that the appropriate ones are loaded depending on
+ * which profile is active. This can be useful if we want to use
+ * different data layer technologies across different environments.
  */
 @SpringBootApplication
 public class SfgDiApplication {
@@ -70,5 +82,15 @@ public class SfgDiApplication {
         ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
         System.out.println(constructorInjectedController.getGreeting());
 
+        /*
+         * Below, depending on the active profile set in the application.properties
+         * file, Spring will load in and inject the correct GreetingService. We can
+         * control which GreetingService is loaded into the Context and injected by
+         * Spring by simply changing the active profile in the application.properties
+         * file.
+         */
+        System.out.println("EXAMPLE Profile-based dependency injection:");
+        I18nController i18nController = (I18nController) ctx.getBean("i18nController");
+        System.out.println(i18nController.sayHello());
 	}
 }

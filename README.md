@@ -1,9 +1,15 @@
 # Dependency Injection Examples
 
-This repository is for an example application built in my [Spring Framework 5 - Beginner to Guru](https://www.udemy.com/testing-spring-boot-beginner-to-guru/?couponCode=GITHUB_REPO) online course
+This repository is for an example application built following [Spring Framework 5 - Beginner to Guru](https://www.udemy.com/testing-spring-boot-beginner-to-guru/?couponCode=GITHUB_REPO) online course.
 
-As you work through the course, please feel free to fork this repository to your out GitHub repo. Most links contain links 
-to source code changes. If you encounter a problem you can compare your code to the lesson code. [See this link for help with compares](https://github.com/springframeworkguru/spring5webapp/wiki#getting-an-error-but-cannot-find-what-is-different-from-lesson-source-code)
+I follow along with his lectures and complete the practical code exercises here.
+
+Contains demonstrations of dependency injection using:
+* Property-based, Setter-based, and Constructor-based injection
+* Examples of what these type of injection would look like without Spring
+* Using @Qualifiers
+* Designating a @Primary bean
+* Using custom Profiles and the default Spring profile
 
 ## All Spring Framework Guru Courses
 ### Spring Framework 5
